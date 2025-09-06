@@ -11,3 +11,4 @@ Route::get('/votos-centro/{centroid}', [CentroVotacionController::class, 'obtene
 Route::get('/colonias/{municipioid}', [CentroVotacionController::class, 'consultarColoniasMunicipio']);
 Route::get('/centros-colonias/{coloniaid}', [CentroVotacionController::class, 'consultarCentrosPorColonia']);
 Route::get('/municipios', [CentroVotacionController::class, 'obtenerMunicipios']);
+Route::get('/detalle-jrv/{centroid}', [CentroVotacionController::class, 'obtenerDetalleJRV']);

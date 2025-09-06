@@ -92,4 +92,21 @@ class CentroVotacionController extends Controller
             ], 500);
         }
     }
+
+    public function obtenerDetalleJRV($idCentro)
+    {
+        try {
+            $detalleJRV = DB::select('EXEC [sp_ver_detalle_centro] ?', [$idCentro]);
+
+            return response()->json([
+                'success' => true,
+                'data' => $detalleJRV,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al obtener el detalle de la JRV: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
 }
