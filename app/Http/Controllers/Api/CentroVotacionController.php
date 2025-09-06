@@ -41,4 +41,55 @@ class CentroVotacionController extends Controller
             ], 500);
         }
     }
+
+    public function consultarColoniasMunicipio($idMunicipio)
+    {
+        try {
+            $colonias = DB::select('EXEC [sp_consultar_colonias_municipio] ?', [$idMunicipio]);
+
+            return response()->json([
+                'success' => true,
+                'data' => $colonias,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al obtener las colonias: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function consultarCentrosPorColonia($idColonia)
+    {
+        try {
+            $centros = DB::select('EXEC [sp_consultar_centros_colonia] ?', [$idColonia]);
+
+            return response()->json([
+                'success' => true,
+                'data' => $centros,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al obtener los centros: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function obtenerMunicipios()
+    {
+        try {
+            $municipios = DB::select('EXEC [sp_consultar_municipios]');
+
+            return response()->json([
+                'success' => true,
+                'data' => $municipios,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al obtener los municipios: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
 }
