@@ -24,4 +24,21 @@ class CentroVotacionController extends Controller
             ], 500);
         }
     }
+
+    public function obtenerVotosPorCentro($idCentro)
+    {
+        try {
+            $votos = DB::select('EXEC [sp_consultar_votos_por_centro] ?', [$idCentro]);
+
+            return response()->json([
+                'success' => true,
+                'data' => $votos,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al obtener los votos: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
 }

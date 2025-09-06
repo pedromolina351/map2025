@@ -7,4 +7,4 @@ use App\Http\Controllers\Api\PersonaController;
 
 
 Route::get('/centros/{municipioid}', [CentroVotacionController::class, 'obtenerCentrosPorMunicipio']);
-
+Route::get('/votos-centro/{centroid}', [CentroVotacionController::class, 'obtenerVotosPorCentro']);
